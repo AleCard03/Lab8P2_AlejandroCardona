@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -47,6 +49,8 @@ public class MainUI extends javax.swing.JFrame {
         TF_NombrePais = new javax.swing.JTextField();
         Btn_CrearPais = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Table_ModPais = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -69,9 +73,11 @@ public class MainUI extends javax.swing.JFrame {
         Btn_CrearNadador = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         SP_MedallasNadador = new javax.swing.JSpinner();
-        jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Table_ModNum = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,15 +145,37 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Crear Pais", jPanel1);
 
+        jPanel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel2MouseEntered(evt);
+            }
+        });
+
+        Table_ModPais.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Nadadores", "Medallas"
+            }
+        ));
+        jScrollPane1.setViewportView(Table_ModPais);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1019, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modificar Pais", jPanel2);
@@ -203,6 +231,12 @@ public class MainUI extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Eliminar Evento", jPanel9);
+
+        jPanel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel4MouseEntered(evt);
+            }
+        });
 
         CB_PaisesNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CB_PaisesNadador.addActionListener(new java.awt.event.ActionListener() {
@@ -311,19 +345,6 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Crear Nadador", jPanel4);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Modificar Nadador", jPanel5);
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -350,6 +371,38 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Simulacion", jPanel10);
 
+        Table_ModNum.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Mejor Tiempo", "Numero de Medallas"
+            }
+        ));
+        jScrollPane2.setViewportView(Table_ModNum);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Modificar Nadador", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -363,7 +416,7 @@ public class MainUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -376,6 +429,8 @@ public class MainUI extends javax.swing.JFrame {
         String nombre = TF_NombrePais.getText();
         Integer medallas = (Integer) SP_MedallasPais.getValue();
 
+        TF_NombrePais.setText("");
+        
         Pais p = new Pais(nombre, medallas);
         agregarPais(p);
 
@@ -394,8 +449,12 @@ public class MainUI extends javax.swing.JFrame {
         int distancia = Integer.parseInt(CB_DistanciaNadador.getItemAt(CB_DistanciaNadador.getSelectedIndex()));
         int medallasCant = (Integer) SP_MedallasNadador.getValue();
         double estatura = Double.parseDouble(TF_EstaturaNadador.getText());
+        Pais p = paises.get(CB_PaisesNadador.getSelectedIndex());
+        
+        TF_NombreNadador.setText("");
+        TF_EstaturaNadador.setText("");
 
-//        Nadador n = new Nadador(nombre, edad, distancia, medallasCant, paisOrigen, estatura);
+        Nadador n = new Nadador(nombre, edad, distancia, medallasCant, p, estatura);
 
     }//GEN-LAST:event_Btn_CrearNadadorMouseClicked
 
@@ -407,26 +466,61 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
         // TODO add your handling code here:
+        
+        
 
-        File a = null;
+
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void jPanel4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseEntered
+        // TODO add your handling code here:
         try {
-            a = new File("./PaisesParticipantes");
+            File a = new File("./PaisesParticipantes.rawr");
             paises = leerPais();
+            
             DefaultComboBoxModel modelo = (DefaultComboBoxModel) CB_PaisesNadador.getModel();
             modelo.removeAllElements();
             
             for (Pais p : paises) {
 
-                modelo.addElement(p);
+                modelo.addElement(p.toString());
 
             }
             CB_PaisesNadador.setModel(modelo);
 
         } catch (Exception e) {
         }
+    }//GEN-LAST:event_jPanel4MouseEntered
 
-
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
+    private void jPanel2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseEntered
+        // TODO add your handling code here:
+        
+        
+        DefaultTableModel modelo = (DefaultTableModel)Table_ModPais.getModel();
+        
+        paises = leerPais();
+            
+            for (Pais paise : paises) {
+            String mem = "";
+            ArrayList<Nadador> tempo = paise.getNadadores();
+                for (Nadador nadador : tempo) {
+                    
+                    mem += nadador.getNombre()+" ";
+                    
+                }
+            Object [] temp = {paise.getNombre(), mem, paise.getMedallas()};
+            
+            modelo.addRow(temp);
+            
+            
+        }
+            
+        
+        
+        Table_ModPais.setModel(modelo);
+        
+        
+    }//GEN-LAST:event_jPanel2MouseEntered
 
     private void agregarPais(Pais p) {
 
@@ -434,9 +528,12 @@ public class MainUI extends javax.swing.JFrame {
         FileOutputStream fo = null;
         ObjectOutputStream oo = null;
         try {
-            archivo = new File("./PaisesParticipantes.rawr");
+            archivo = new File("./PaisesParticipantes.nah");
             fo = new FileOutputStream(archivo);
             oo = new ObjectOutputStream(fo);
+            for (Pais paise : paises) {
+                oo.writeObject(paise);
+            }
             oo.writeObject(p);
             oo.flush();
             
@@ -451,31 +548,44 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     private ArrayList<Pais> leerPais() {
-
-        paises = new ArrayList();
-        FileInputStream fi = null;
-        ObjectInputStream oi = null;
+        
+        
+        ArrayList<Pais> countries = new ArrayList();
+         
         try {
-            File archivo = new File("./PaisesParticipantes.rawr");
-            fi = new FileInputStream(archivo);
-            oi = new ObjectInputStream(fi);
-            Pais country = new Pais();
+            boolean continuar = true;
+            File archivo = new File("./PaisesParticipantes.nah");
+            FileInputStream fi = new FileInputStream(archivo);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            Object country = new Object();
             
-            while ((country = (Pais) oi.readObject()) != null) {
+            try {
+                while ((country = oi.readObject()) != null) {
                 
-                paises.add(country);
+                
+                if(country instanceof Pais){
+                    
+                    countries.add((Pais)country);
+                    
+                }
+                else{
+                    
+                    continuar = false;
+                    
+                }
+                
 
             }
+            } catch (Exception e) {
+            }
+            
+            oi.close();
+            fi.close();
             
         } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
-        try {
-            fi.close();
-            oi.close();
-        } catch (Exception e) {
-        }
-        return paises;
+        
+        return countries;
 
     }
 
@@ -524,6 +634,8 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JTextField TF_NombreNadador;
     private javax.swing.JTextField TF_NombrePais;
     private javax.swing.JTextField TF_TiempoNadador;
+    private javax.swing.JTable Table_ModNum;
+    private javax.swing.JTable Table_ModPais;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -545,6 +657,8 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }
