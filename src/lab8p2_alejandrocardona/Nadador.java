@@ -1,7 +1,11 @@
 
 package lab8p2_alejandrocardona;
 
-public class Nadador {
+import java.io.Serializable;
+
+
+
+public class Nadador implements Serializable{
     
     private String nombre;
     private int edad, distancia, medallasCant;

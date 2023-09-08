@@ -5,20 +5,28 @@
 package lab8p2_alejandrocardona;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author jets
  */
 public class MainUI extends javax.swing.JFrame {
-
+    private ArrayList<Pais> paises = new ArrayList();
     /**
      * Creates new form MainUI
      */
     public MainUI() {
         initComponents();
+
     }
 
     /**
@@ -40,15 +48,43 @@ public class MainUI extends javax.swing.JFrame {
         Btn_CrearPais = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        CB_PaisesNadador = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        TF_NombreNadador = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        SP_EdadNadador = new javax.swing.JSpinner();
+        jLabel7 = new javax.swing.JLabel();
+        TF_EstaturaNadador = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        CB_EstiloNatacionNadador = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        CB_DistanciaNadador = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        TF_TiempoNadador = new javax.swing.JTextField();
+        Btn_CrearNadador = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        SP_MedallasNadador = new javax.swing.JSpinner();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Nombre");
 
@@ -98,7 +134,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(68, 68, 68)
                 .addComponent(Btn_CrearPais)
-                .addContainerGap(486, Short.MAX_VALUE))
+                .addContainerGap(307, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Crear Pais", jPanel1);
@@ -111,7 +147,7 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Modificar Pais", jPanel2);
@@ -124,49 +160,10 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Eliminar Pais", jPanel3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Crear Nadador", jPanel4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Modificar Nadador", jPanel5);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Eliminar Nadador", jPanel6);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -176,7 +173,7 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Crear Evento", jPanel7);
@@ -189,7 +186,7 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Modificar Evento", jPanel8);
@@ -202,10 +199,143 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Eliminar Evento", jPanel9);
+
+        CB_PaisesNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CB_PaisesNadador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CB_PaisesNadadorActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Pais del Nadador");
+
+        jLabel5.setText("Nombre del Nadador");
+
+        jLabel6.setText("Edad");
+
+        jLabel7.setText("Estatura (Metros)");
+
+        jLabel8.setText("Estilo de Natacion");
+
+        CB_EstiloNatacionNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LIBRE", "PECHO", "DORSO", "MARIPOSA" }));
+
+        jLabel9.setText("Distancia a Competir");
+
+        CB_DistanciaNadador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "100", "200", "400", "800" }));
+
+        jLabel10.setText("Tiempo Mas Rapido");
+
+        Btn_CrearNadador.setText("Crear Nadador");
+        Btn_CrearNadador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_CrearNadadorMouseClicked(evt);
+            }
+        });
+
+        jLabel11.setText("Cantidad de Medallas");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(64, 64, 64)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_CrearNadador)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)
+                                .addComponent(jLabel7)
+                                .addComponent(jLabel8))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11))
+                        .addGap(63, 63, 63)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CB_PaisesNadador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TF_NombreNadador)
+                            .addComponent(SP_EdadNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TF_EstaturaNadador)
+                            .addComponent(CB_EstiloNatacionNadador, 0, 242, Short.MAX_VALUE)
+                            .addComponent(CB_DistanciaNadador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TF_TiempoNadador)
+                            .addComponent(SP_MedallasNadador, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(800, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(TF_NombreNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(SP_EdadNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(TF_EstaturaNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(CB_EstiloNatacionNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(CB_DistanciaNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(TF_TiempoNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CB_PaisesNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel11)
+                    .addComponent(SP_MedallasNadador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(Btn_CrearNadador)
+                .addContainerGap(77, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Crear Nadador", jPanel4);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1283, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Modificar Nadador", jPanel5);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1283, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 535, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Eliminar Nadador", jPanel6);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -215,7 +345,7 @@ public class MainUI extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 714, Short.MAX_VALUE)
+            .addGap(0, 535, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Simulacion", jPanel10);
@@ -224,11 +354,17 @@ public class MainUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -236,30 +372,113 @@ public class MainUI extends javax.swing.JFrame {
 
     private void Btn_CrearPaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_CrearPaisMouseClicked
         // TODO add your handling code here:
-        
+
         String nombre = TF_NombrePais.getText();
-        Integer medallas = (Integer)SP_MedallasPais.getValue();
-        
+        Integer medallas = (Integer) SP_MedallasPais.getValue();
+
         Pais p = new Pais(nombre, medallas);
-        
-        File archivo;
-        try {
-            archivo = new File("./PaisesParticipantes");
-            FileOutputStream fo = new FileOutputStream(archivo);
-            ObjectOutputStream oo = new ObjectOutputStream(fo);
-            oo.writeObject(p);
-            
-        } catch (Exception e) {
-            
-            System.out.println(e.getMessage());
-            
-        }
-        
+        agregarPais(p);
+
+
     }//GEN-LAST:event_Btn_CrearPaisMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void CB_PaisesNadadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CB_PaisesNadadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CB_PaisesNadadorActionPerformed
+
+    private void Btn_CrearNadadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_CrearNadadorMouseClicked
+        // TODO add your handling code here:
+
+        String nombre = TF_NombreNadador.getText();
+        int edad = (Integer) SP_EdadNadador.getValue();
+        int distancia = Integer.parseInt(CB_DistanciaNadador.getItemAt(CB_DistanciaNadador.getSelectedIndex()));
+        int medallasCant = (Integer) SP_MedallasNadador.getValue();
+        double estatura = Double.parseDouble(TF_EstaturaNadador.getText());
+
+//        Nadador n = new Nadador(nombre, edad, distancia, medallasCant, paisOrigen, estatura);
+
+    }//GEN-LAST:event_Btn_CrearNadadorMouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+
+        File a = null;
+        try {
+            a = new File("./PaisesParticipantes");
+            paises = leerPais();
+            DefaultComboBoxModel modelo = (DefaultComboBoxModel) CB_PaisesNadador.getModel();
+            modelo.removeAllElements();
+            
+            for (Pais p : paises) {
+
+                modelo.addElement(p);
+
+            }
+            CB_PaisesNadador.setModel(modelo);
+
+        } catch (Exception e) {
+        }
+
+
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
+
+    private void agregarPais(Pais p) {
+
+        File archivo;
+        FileOutputStream fo = null;
+        ObjectOutputStream oo = null;
+        try {
+            archivo = new File("./PaisesParticipantes.rawr");
+            fo = new FileOutputStream(archivo);
+            oo = new ObjectOutputStream(fo);
+            oo.writeObject(p);
+            oo.flush();
+            
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+
+        }
+        
+        
+    }
+
+    private ArrayList<Pais> leerPais() {
+
+        paises = new ArrayList();
+        FileInputStream fi = null;
+        ObjectInputStream oi = null;
+        try {
+            File archivo = new File("./PaisesParticipantes.rawr");
+            fi = new FileInputStream(archivo);
+            oi = new ObjectInputStream(fi);
+            Pais country = new Pais();
+            
+            while ((country = (Pais) oi.readObject()) != null) {
+                
+                paises.add(country);
+
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
+            fi.close();
+            oi.close();
+        } catch (Exception e) {
+        }
+        return paises;
+
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,12 +512,29 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_CrearNadador;
     private javax.swing.JButton Btn_CrearPais;
+    private javax.swing.JComboBox<String> CB_DistanciaNadador;
+    private javax.swing.JComboBox<String> CB_EstiloNatacionNadador;
+    private javax.swing.JComboBox<String> CB_PaisesNadador;
+    private javax.swing.JSpinner SP_EdadNadador;
+    private javax.swing.JSpinner SP_MedallasNadador;
     private javax.swing.JSpinner SP_MedallasPais;
+    private javax.swing.JTextField TF_EstaturaNadador;
+    private javax.swing.JTextField TF_NombreNadador;
     private javax.swing.JTextField TF_NombrePais;
+    private javax.swing.JTextField TF_TiempoNadador;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;

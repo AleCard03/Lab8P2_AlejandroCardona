@@ -3,12 +3,19 @@ package lab8p2_alejandrocardona;
 
 import java.util.ArrayList;
 
-public class Pais {
+import java.io.Serializable;
+
+public class Pais implements Serializable{
     
     private String nombre;
     private ArrayList <Nadador> nadadores = new ArrayList();
     private int medallas;
 
+    public Pais() {
+    }
+
+    
+    
     public Pais(String nombre, int medallas) {
         this.nombre = nombre;
         this.medallas = medallas;
@@ -37,6 +44,8 @@ public class Pais {
     public void setMedallas(int medallas) {
         this.medallas = medallas;
     }
+    
+    
 
     @Override
     public String toString() {
