@@ -89,6 +89,11 @@ public class MainUI extends javax.swing.JFrame {
         Table_ModNum = new javax.swing.JTable();
         CB_ListarNadador = new javax.swing.JComboBox<>();
         jPanel10 = new javax.swing.JPanel();
+        ProgBar_Nad1 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JProgressBar();
+        jProgressBar3 = new javax.swing.JProgressBar();
+        Btn_Start = new javax.swing.JButton();
+        CB_Sim = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -454,15 +459,50 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Modificar Nadador", jPanel5);
 
+        jPanel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel10MouseClicked(evt);
+            }
+        });
+
+        Btn_Start.setText("Iniciar");
+        Btn_Start.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_StartMouseClicked(evt);
+            }
+        });
+
+        CB_Sim.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CB_Sim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Start)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jProgressBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 801, Short.MAX_VALUE)
+                        .addComponent(jProgressBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ProgBar_Nad1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(435, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(CB_Sim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(ProgBar_Nad1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addComponent(jProgressBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jProgressBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addComponent(Btn_Start)
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Simulacion", jPanel10);
@@ -698,6 +738,34 @@ public class MainUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jPanel5MouseClicked
 
+    private void Btn_StartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_StartMouseClicked
+        // TODO add your handling code here:
+        
+        
+        nadadores = leerNadador();
+        Nadador p = nadadores.get(0);
+        Nadador1 swimmer = new Nadador1(ProgBar_Nad1, (int)p.getMejorTemp());
+        swimmer.start();
+        
+    }//GEN-LAST:event_Btn_StartMouseClicked
+
+    private void jPanel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel10MouseClicked
+        // TODO add your handling code here:
+        nadadores = leerNadador();
+
+            
+            DefaultComboBoxModel modelo = (DefaultComboBoxModel) CB_Sim.getModel();
+            
+            modelo.removeAllElements();
+            
+            for (Nadador p : nadadores) {
+
+                modelo.addElement(p.getNombre() );
+
+            }
+            CB_Sim.setModel(modelo);
+    }//GEN-LAST:event_jPanel10MouseClicked
+
     private void agregarPais(Pais p) {
 
         File archivo;
@@ -883,12 +951,15 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JButton Btn_CrearEvento;
     private javax.swing.JButton Btn_CrearNadador;
     private javax.swing.JButton Btn_CrearPais;
+    private javax.swing.JButton Btn_Start;
     private javax.swing.JComboBox<String> CB_DistanciaEvento;
     private javax.swing.JComboBox<String> CB_DistanciaNadador;
     private javax.swing.JComboBox<String> CB_EstiloNatacionEvento;
     private javax.swing.JComboBox<String> CB_EstiloNatacionNadador;
     private javax.swing.JComboBox<String> CB_ListarNadador;
     private javax.swing.JComboBox<String> CB_PaisesNadador;
+    private javax.swing.JComboBox<String> CB_Sim;
+    private javax.swing.JProgressBar ProgBar_Nad1;
     private javax.swing.JSpinner SP_EdadNadador;
     private javax.swing.JSpinner SP_MedallasNadador;
     private javax.swing.JSpinner SP_MedallasPais;
@@ -922,6 +993,8 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JProgressBar jProgressBar2;
+    private javax.swing.JProgressBar jProgressBar3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
