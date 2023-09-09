@@ -64,6 +64,8 @@ public class MainUI extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         Btn_CrearEvento = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Table_Eventos = new javax.swing.JTable();
         jPanel9 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         CB_PaisesNadador = new javax.swing.JComboBox<>();
@@ -214,6 +216,11 @@ public class MainUI extends javax.swing.JFrame {
         jLabel14.setText("Distancia");
 
         Btn_CrearEvento.setText("Crear Evento");
+        Btn_CrearEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Btn_CrearEventoMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -259,15 +266,37 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Crear Evento", jPanel7);
 
+        jPanel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel8MouseEntered(evt);
+            }
+        });
+
+        Table_Eventos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Distancia", "Estilo", "Record"
+            }
+        ));
+        jScrollPane3.setViewportView(Table_Eventos);
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1283, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 892, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(248, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Modificar Evento", jPanel8);
@@ -406,10 +435,7 @@ public class MainUI extends javax.swing.JFrame {
 
         Table_ModNum.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Nacionalidad", "Edad", "Estatura", "Estilo", "Distancia", "Mejor Tiempo", "Numero de Medallas"
@@ -520,7 +546,7 @@ public class MainUI extends javax.swing.JFrame {
         ObjectOutputStream ow;
         File archivo;
         try {
-            archivo = new File ("./Nadadores");
+            archivo = new File ("./Nadadores.nah");
             fw = new FileOutputStream(archivo);
             ow = new ObjectOutputStream(fw);
             ow.writeObject(n);
@@ -607,7 +633,48 @@ public class MainUI extends javax.swing.JFrame {
             modelo.addRow(temp);
         }
         Table_ModNum.setModel(modelo);
+        
     }//GEN-LAST:event_jPanel5MouseEntered
+
+    private void Btn_CrearEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Btn_CrearEventoMouseClicked
+        // TODO add your handling code here:
+        
+        int distancia  = Integer.parseInt((String)CB_DistanciaEvento.getSelectedItem());
+        String evento = (String)CB_EstiloNatacionEvento.getSelectedItem();
+        double record = Double.parseDouble(TF_RecordEvento.getText());
+        
+        Evento ev = new Evento(evento, distancia, (int)record);
+        FileOutputStream fw;
+        ObjectOutputStream ow;
+        File archivo;
+        try {
+            archivo = new File ("./Eventos.nah");
+            fw = new FileOutputStream(archivo);
+            ow = new ObjectOutputStream(fw);
+            ow.writeObject(ev);
+            ow.flush();
+            ow.close();
+            fw.close();
+        } catch (Exception e) {
+        }
+        
+        
+    }//GEN-LAST:event_Btn_CrearEventoMouseClicked
+
+    private void jPanel8MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel8MouseEntered
+        // TODO add your handling code here:
+        
+        eventos = leerEvento();
+        DefaultTableModel modelo = (DefaultTableModel)Table_Eventos.getModel();
+        for (Evento evento : eventos) {
+            
+            Object [] temp = {evento.getDistancia(), evento.getEstilo(), evento.getRecord()};
+            modelo.addRow(temp);
+            
+        }
+        Table_Eventos.setModel(modelo);
+        
+    }//GEN-LAST:event_jPanel8MouseEntered
 
     private void agregarPais(Pais p) {
 
@@ -675,6 +742,47 @@ public class MainUI extends javax.swing.JFrame {
         return countries;
 
     }
+    private ArrayList<Evento> leerEvento() {
+        
+        
+        ArrayList<Evento> events = new ArrayList();
+         
+        try {
+            boolean continuar = true;
+            File archivo = new File("./Eventos.nah");
+            FileInputStream fi = new FileInputStream(archivo);
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            Object country = new Object();
+            
+            try {
+                while ((country = oi.readObject()) != null) {
+                
+                
+                if(country instanceof Evento){
+                    
+                    events.add((Evento)country);
+                    
+                }
+                else{
+                    
+                    continuar = false;
+                    
+                }
+                
+
+            }
+            } catch (Exception e) {
+            }
+            
+            oi.close();
+            fi.close();
+            
+        } catch (Exception e) {
+        }
+        
+        return events;
+
+    }
     private ArrayList<Nadador> leerNadador() {
         
         
@@ -693,7 +801,7 @@ public class MainUI extends javax.swing.JFrame {
                 
                 if(natacion instanceof Nadador){
                     
-                    nadadores.add((Nadador)natacion);
+                    phelps.add((Nadador)natacion);
                     
                 }
                 else{
@@ -766,6 +874,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JTextField TF_NombrePais;
     private javax.swing.JTextField TF_RecordEvento;
     private javax.swing.JTextField TF_TiempoNadador;
+    private javax.swing.JTable Table_Eventos;
     private javax.swing.JTable Table_ModNum;
     private javax.swing.JTable Table_ModPais;
     private javax.swing.JLabel jLabel1;
@@ -794,6 +903,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     // End of variables declaration//GEN-END:variables
 }

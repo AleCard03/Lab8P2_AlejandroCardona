@@ -12,7 +12,7 @@ public class Nadador implements Serializable{
     private Pais paisOrigen;
     private String estilo;
     private double estatura;
-    private double mejorTemp
+    private double mejorTemp;
 
     public Nadador(String nombre, int edad, int distancia, int medallasCant, Pais paisOrigen, double estatura, String estilo, double mejorTemp) {
         this.nombre = nombre;
