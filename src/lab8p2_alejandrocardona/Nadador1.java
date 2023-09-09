@@ -25,9 +25,9 @@ public class Nadador1 extends Thread{
     @Override
     public void run() {
         while (vive) {
-                progBar_c.setMaximum(tiempoMax*100);
+                progBar_c.setMaximum(tiempoMax*1000);
                 progBar_c.setValue(progBar_c.getValue()+100);
-                if(progBar_c.getValue() >= tiempoMax*100){
+                if(progBar_c.getValue() >= tiempoMax*1000){
                     
                     vive = false;
                     
