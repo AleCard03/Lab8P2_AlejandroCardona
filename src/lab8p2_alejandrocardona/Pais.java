@@ -36,7 +36,13 @@ public class Pais implements Serializable{
     public void setNadadores(ArrayList<Nadador> nadadores) {
         this.nadadores = nadadores;
     }
-
+    
+    public void addNadadores(Nadador n){
+        
+        this.nadadores.add(n);
+        
+    }
+    
     public int getMedallas() {
         return medallas;
     }
